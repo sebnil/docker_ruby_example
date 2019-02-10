@@ -1,10 +1,15 @@
-docker.image('ruby:2.3.1').inside {
-
-    stage("Install Bundler") {
-      sh "gem install bundler --no-rdoc --no-ri"
+pipeline
+{
+  agent {
+    docker {
+      image 'ruby:2.3.1'
     }
-
-    stage("Use Bundler to install dependencies") {
-      sh "bundle install"
+  }
+  stages {
+    stage("Test Ruby") {
+      steps {
+        sh "ruby --version"
+      }
     }
+  }
 }
